@@ -47,6 +47,12 @@
       }
       .brand h1 { font-size: 20px; font-weight: 800; color: var(--green-900); letter-spacing: -0.02em; }
       .brand p { font-size: 11px; color: var(--green-700); opacity: .8; }
+      .about-link {
+        flex-shrink: 0; padding: 9px 14px; border: 1px solid var(--green-100);
+        border-radius: 999px; color: var(--green-900); background: #fff;
+        font-size: 13px; font-weight: 600; text-decoration: none; transition: .15s;
+      }
+      .about-link:hover { border-color: var(--green-500); background: var(--green-50); }
       .search-wrap { position: relative; margin-left: auto; max-width: 420px; flex: 1; }
       .search-wrap input {
         width: 100%; padding: 9px 16px 9px 38px;
@@ -178,6 +184,7 @@
             <p>Vert, t'y go · Angers</p>
           </div>
         </div>
+        <a class="about-link" href="qui-nous-sommes.html">Qui nous sommes&nbsp;?</a>
         <div class="search-wrap">
           <span class="icon">🔍</span>
           <input id="search" type="search" placeholder="Rechercher un lieu, une ambiance…" />
@@ -219,8 +226,10 @@
         "Restaurant végétarien":  { color: "#e86a8a", ring: "#fadde5", emoji: "🥗" },
       };
       const photoUrl = (f) =>
-        "https://commons.wikimedia.org/wiki/Special:FilePath/" +
-        encodeURIComponent(f) + "?width=420";
+        f.startsWith("images/")
+          ? f
+          : "https://commons.wikimedia.org/wiki/Special:FilePath/" +
+            encodeURIComponent(f) + "?width=420";
 
       const LIEUX = [
         { id:"jardin-plantes", nom:"Jardin des Plantes", cat:"Parc & Jardin", lat:47.4748, lon:-0.5445,
