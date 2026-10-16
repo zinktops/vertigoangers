@@ -152,6 +152,8 @@
       .detail .tags { margin-top: 12px; }
       .detail .tag { font-size: 11px; padding: 4px 11px; background: var(--green-50); border: 1px solid var(--green-100); color: var(--green-700); font-weight: 500; }
       .detail .actions { display: flex; align-items: center; gap: 10px; margin-top: 16px; }
+      .detail .external-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+      .detail .external-links a { color: var(--green-700); font-size: 12px; }
       .btn-itinerary {
         flex: 1; display: block; text-align: center; text-decoration: none;
         font-size: 14px; font-weight: 600; padding: 11px; border-radius: 12px;
@@ -286,6 +288,25 @@
         { id:"quai-oliviers", nom:"Quai des Oliviers", cat:"Épicerie bio & locale", lat:47.466987, lon:-0.556582,
           desc:"Épicerie fine bio aux saveurs méditerranéennes : plus de 800 produits rares et gourmands, huiles d'olive, épices, charcuteries et vins.",
           ambiances:["Méditerranéen","Épicerie fine","Bio"], taille:"Boutique", access:"Centre-ville d'Angers", emoji:"🫒" },
+        { id:"amap-du-quai", nom:"AMAP du Quai", cat:"Épicerie bio & locale", lat:47.4722, lon:-0.5627,
+          desc:"Produits : légumes, fruits, viandes, miel, volaille, œufs, lait, fromage de brebis, pain, farine, produits laitiers, huiles, légumes secs, châtaignes, thé, café, chocolat et riz. Distribution le jeudi de 17h30 à 19h au théâtre Le Quai, dans le hall ou sur l'esplanade (Cale de la Savatte).",
+          ambiances:["AMAP","Local","Produits de saison"], taille:"AMAP", access:"Théâtre Le Quai, Cale de la Savatte",
+          contact:"amapduquai@gmail.com", links:[{ label:"Fiche AMAP", url:"https://www.avenir-bio.fr/fiche_amap,amap-du-quai,849.html" }], emoji:"🥕" },
+        { id:"amap-homme-de-terre", nom:"AMAP Homme de Terre", cat:"Épicerie bio & locale", lat:47.4608, lon:-0.5435,
+          desc:"Produits : légumes bio, fruits, volaille bio, œufs bio, pain, agneau, veau, produits laitiers et miel. Distribution le mercredi de 18h15 à 19h15 sur le parking de l'ESA, 40 rue Chèvre.",
+          ambiances:["AMAP","Bio","Local"], taille:"AMAP", access:"Parking de l'ESA, 40 rue Chèvre",
+          contact:"marie.lys.louis@gmail.com", links:[
+            { label:"Fiche AMAP", url:"https://www.avenir-bio.fr/fiche_amap,amap-homme-de-terre,854.html" },
+            { label:"Facebook", url:"https://www.facebook.com/amapesa" },
+          ], emoji:"🥬" },
+        { id:"amap-aneth", nom:"AMAP L'Aneth", cat:"Épicerie bio & locale", lat:47.4808, lon:-0.5311,
+          desc:"Produits : légumes bio, pommes bio, lait et yaourts bio, agrumes, pain, veau, agneau, œufs, fromage de chèvre, légumineuses et farines. Distribution le mercredi de 18h30 à 19h30 à l'école Notre-Dame-de-la-Miséricorde, entrée rue du Chanoine Jean Brac.",
+          ambiances:["AMAP","Bio","Local"], taille:"AMAP", access:"École Notre-Dame-de-la-Miséricorde, rue du Chanoine Jean Brac",
+          contact:"amaplaneth@riseup.net", links:[{ label:"Fiche AMAP", url:"https://www.avenir-bio.fr/fiche_amap,amap-l-aneth,846.html" }], emoji:"🌱" },
+        { id:"amap-potes-en-bottes", nom:"AMAP Les Potes en Bottes", cat:"Épicerie bio & locale", lat:47.4844, lon:-0.5338,
+          desc:"Produits : légumes. Distribution le mardi de 17h45 à 18h45 chez Penrose, 138 rue de la Chalouère.",
+          ambiances:["AMAP","Légumes","Local"], taille:"AMAP", access:"Penrose, 138 rue de la Chalouère",
+          contact:"guennec.thierry@free.fr", emoji:"🥕" },
         { id:"sicle", nom:"SICLE — Jardins & paysages", cat:"Entreprise engagée", lat:47.471153, lon:-0.536983,
           desc:"SCOP de paysagistes-jardiniers à vélo, labellisée Zéro Phyto : conception et entretien écologiques de jardins, ateliers participatifs et ferme urbaine de Climax dès 2026.",
           ambiances:["SCOP","Zéro Phyto","À vélo"], taille:"Coopérative", access:"25 avenue Montaigne", emoji:"🚲" },
@@ -445,6 +466,14 @@
           '<a class="btn-itinerary" href="https://www.openstreetmap.org/?mlat=' + l.lat + "&mlon=" + l.lon +
           '#map=16/' + l.lat + "/" + l.lon + '" target="_blank" rel="noreferrer">🧭 Itinéraire</a>' +
           '<span class="access">' + l.access + "</span></div>";
+        if (l.contact || l.links) {
+          detailEl.innerHTML += '<div class="external-links">' +
+            (l.contact ? '<a href="mailto:' + l.contact + '">✉️ ' + l.contact + "</a>" : "") +
+            (l.links || []).map((link) =>
+              '<a href="' + link.url + '" target="_blank" rel="noreferrer">' + link.label + "</a>"
+            ).join("") +
+            "</div>";
+        }
         detailEl.querySelector(".close").onclick = () => {
           detailEl.style.display = "none";
           state.selected = null;
