@@ -91,7 +91,7 @@
       @media (max-width: 900px) {
         .layout { grid-template-columns: 1fr; }
         .list-panel { max-height: 300px; }
-        .map-panel { height: 60vh; }
+        .map-panel { height: 60vh; scroll-margin-top: 80px; }
       }
 
       /* ---------- Liste ---------- */
@@ -432,7 +432,12 @@
             '<span class="tag cat" style="--cat-color:' + CAT_STYLE[l.cat].color + '">' + l.cat + "</span>" +
             l.ambiances.slice(0, 2).map((a) => '<span class="tag">' + a + "</span>").join("") +
             "</div></div>";
-          card.onclick = () => selectLieu(l);
+          card.onclick = () => {
+            selectLieu(l);
+            if (window.matchMedia("(max-width: 900px)").matches) {
+              document.querySelector(".map-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          };
           listEl.appendChild(card);
         });
         if (list.length === 0)
