@@ -45,6 +45,9 @@
         font-size: 13px; font-weight: 600; text-decoration: none;
       }
       .back-link:hover { border-color: var(--green-500); background: var(--green-50); }
+      .page-links { margin-left: auto; display: flex; gap: 8px; }
+      .page-links .back-link { margin-left: 0; }
+      .back-link.active { border-color: var(--green-500); background: var(--green-50); }
       main {
         width: min(100% - 40px, 880px); margin: 56px auto;
         flex: 1;
@@ -84,6 +87,8 @@
       @media (max-width: 640px) {
         main { margin: 24px auto; }
         .values { grid-template-columns: 1fr; }
+        .header-inner { flex-wrap: wrap; }
+        .page-links { width: 100%; order: 2; }
       }
     </style>
   </head>
@@ -97,7 +102,10 @@
             <p>Vert, t'y go · Angers</p>
           </span>
         </a>
-        <a class="back-link" href="index.html">← Retour à la carte</a>
+        <nav class="page-links" aria-label="Navigation principale">
+          <a class="back-link active" href="qui-nous-sommes.html" aria-current="page">Qui nous sommes&nbsp;?</a>
+          <a class="back-link" href="contact.html">Contact</a>
+        </nav>
       </div>
     </header>
     <main>
