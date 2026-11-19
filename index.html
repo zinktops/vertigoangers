@@ -55,6 +55,13 @@
         font-size: 13px; font-weight: 600; text-decoration: none; transition: .15s;
       }
       .about-link:hover { border-color: var(--green-500); background: var(--green-50); }
+      .header-links { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+      .header-links .about-link { padding: 9px 14px; }
+      @media (max-width: 640px) {
+        .header-inner { flex-wrap: wrap; }
+        .header-links { order: 3; width: 100%; }
+        .search-wrap { max-width: none; }
+      }
       .search-wrap { position: relative; margin-left: auto; max-width: 420px; flex: 1; }
       .search-wrap input {
         width: 100%; padding: 9px 16px 9px 38px;
@@ -188,7 +195,10 @@
             <p>Vert, t'y go · Angers</p>
           </div>
         </div>
-        <a class="about-link" href="qui-nous-sommes.html">Qui nous sommes&nbsp;?</a>
+        <nav class="header-links" aria-label="Navigation principale">
+          <a class="about-link" href="qui-nous-sommes.html">Qui nous sommes&nbsp;?</a>
+          <a class="about-link" href="contact.html">Contact</a>
+        </nav>
         <div class="search-wrap">
           <span class="icon">🔍</span>
           <input id="search" type="search" placeholder="Rechercher un lieu, une ambiance…" />
